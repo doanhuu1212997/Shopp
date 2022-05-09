@@ -1,0 +1,11 @@
+.error_form{
+    font-size: 13px;
+    color: red;
+    font-style: italic;
+}
+img.card-img-top.card-img-back1 {
+    margin-left: -100%;
+}input.cartNum {
+    width: 50px;
+    text-align: center;
+}
