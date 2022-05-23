@@ -1,8 +1,8 @@
-import { Spin } from "antd";
+import { Spin, Space } from "antd";
 import React from "react";
 import { useSelector } from "react-redux";
 import "./loading.css";
-
+import "antd/dist/antd.css";
 const Loading = () => {
   const loading = useSelector((state) => state.loading.loading);
 
@@ -10,7 +10,9 @@ const Loading = () => {
     <>
       {loading && (
         <div className="backgroundLoader">
-          <Spin size="large" />
+          <Space size="middle">
+            <Spin size="large" />
+          </Space>
         </div>
       )}
     </>

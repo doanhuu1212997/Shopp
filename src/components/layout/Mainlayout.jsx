@@ -3,6 +3,8 @@ import Header from "../Header";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import * as routers from "router";
+import Footer from "components/Footer";
+import Loading from "../Loading/Loading";
 const Mainlayout = () => {
   const ShowContentChildren = (routers) => {
     let results = null;
@@ -24,9 +26,10 @@ const Mainlayout = () => {
   return (
     <>
       {" "}
+      <Loading />
       <Header />
       <Routes>{ShowContentChildren(routers.routerChildren)}</Routes>
-      <h1>111</h1>
+      <Footer />
     </>
   );
 };

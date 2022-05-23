@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 // import { Link } from "react-router-dom";
 
 export default function Header() {
@@ -1012,9 +1013,9 @@ export default function Header() {
                 {/* <a data-toggle="modal" href="#modalSearch"></a> */}
               </li>
               <li className="nav-item ml-lg-n4">
-                <a className="nav-link" to="/account">
+                <Link className="nav-link" to="/account">
                   <i className="fe fe-user" />
-                </a>
+                </Link>
               </li>
               <li className="nav-item ml-lg-n4">
                 <a to="/account/wishlist" className="nav-link">
