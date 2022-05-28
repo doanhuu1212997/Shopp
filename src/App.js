@@ -1,7 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
+
 import * as routers from "./router";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "antd/dist/antd.css";
+import { ToastContainer } from 'react-toastify';
 function App() {
   const showContentComponents = (routers) => {
     let results = null;
@@ -22,6 +25,7 @@ function App() {
           {showContentComponents(routers.routerLayout)}
         </Routes>
       </BrowserRouter>
+      <ToastContainer />
     </div>
   );
 }

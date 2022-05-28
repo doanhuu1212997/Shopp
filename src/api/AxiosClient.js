@@ -1,7 +1,7 @@
 import axios from 'axios';
 // Set up default config for http requests here
 const axiosClient = axios.create({
-	baseURL: "https://cfd-reactjs.herokuapp.com",
+	baseURL: "http://cfd-reactjs.herokuapp.com",
 	headers: {
 		'content-type': 'application/json',
 	},

@@ -1,10 +1,10 @@
 import * as Yup from 'yup';
 
 export const STRING = Yup.string();
+export const PASSWORDLogin = Yup.string().required("Vui lòng nhập mật khẩu")
+export const NUMBER = Yup.string().matches(/^[0-9]+$/, 'Dữ liệu phải là số').required('Vui lòng điền thông tin');
 
-export const NUMBER = Yup.string().matches(/^[0-9]+$/, 'Dữ liệu phải là số');
-
-export const EMAIL = Yup.string().email('Email không đúng định dạng');
+export const EMAIL = Yup.string().email('Email không đúng định dạng').required('Vui lòng nhập Email ');
 
 export const PHONE = Yup.string().matches(/((09|03|07|08|05)+([0-9]{8})\b)/g, 'Số điện thoại không hợp lệ');
 

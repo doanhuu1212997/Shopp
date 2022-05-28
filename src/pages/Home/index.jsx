@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchGetProduct } from "redux/productSlice";
 import CountDow from "hoc/widthCountDown";
 import countDown from "./components/countdown";
+
 export default function Home() {
   let dispatch = useDispatch();
   const list = useSelector((state) => state.product.list);

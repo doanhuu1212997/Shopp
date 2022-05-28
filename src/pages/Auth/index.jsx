@@ -2,38 +2,38 @@ import FormInput from "components/custom-fields/inputField/FormInput";
 import { FastField, Form, Formik } from "formik";
 import { Button, Col, Row } from "antd";
 import { useEffect, useState } from "react";
-import { EMAIL } from "constants/validationYup";
+import { EMAIL, PASSWORDLogin } from "constants/validationYup";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "redux/authSlice";
+import { login, fetchGetLogin } from "redux/authSlice";
 import { useNavigate } from "react-router-dom";
 const initialLogin = {
-  email: "",
+  username: "",
   password: "",
 };
 const initialRegister = {
-  email: "",
+  username: "",
   password: "",
-  confrm_password: "",
+  name: "",
 };
 const validationSchema = Yup.object().shape({
-  email: EMAIL,
+  username: EMAIL,
+  password: PASSWORDLogin,
 });
 export default function Auth() {
   const [dataLogin, setDataLogin] = useState(initialLogin);
   const [dataRes, setDataRes] = useState(initialRegister);
   let dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth.login);
+  const login = useSelector((state) => state.auth.login);
+
   let navigate = useNavigate();
-  const handleSubmit = (e) => {
-    console.log(e);
-    // dispatch(login());
+  const handleSubmit = async (value) => {
+    console.log(value);
+    const { payload } = await dispatch(fetchGetLogin(value));
+    console.log(payload);
   };
-  useEffect(() => {
-    if (auth) {
-      navigate("/account");
-    }
-  }, [auth]);
+
+  useEffect(() => {}, [login]);
   return (
     <section className="py-12 bg-gray" style={{}}>
       <div className="container">
@@ -52,14 +52,24 @@ export default function Auth() {
                       validationSchema={validationSchema}
                       onSubmit={handleSubmit}
                     >
-                      {() => {
+                      {({
+                        values,
+                        errors,
+                        handleSubmit,
+                        handleChange,
+                        handleBlur,
+                      }) => {
                         return (
-                          <Form id="form-login">
+                          <Form
+                            id="form-login"
+                            onSubmit={handleSubmit}
+                            onBlur={handleBlur}
+                          >
                             <div className="row">
                               <div className="col-12 mb-3">
                                 <FastField
                                   component={FormInput}
-                                  name="email"
+                                  name="username"
                                   placeholder="Email Address *"
                                 />
                               </div>
@@ -154,8 +164,8 @@ export default function Auth() {
                               <div className="col-12">
                                 <FastField
                                   component={FormInput}
-                                  name="confrm_password"
-                                  placeholder="Confrm Password * *"
+                                  name="name"
+                                  placeholder="Name"
                                 />
                               </div>
                             </div>

@@ -31,15 +31,16 @@ export const asyncWrapper = async (fn, params = null) => {
         store.dispatch(show());
         const res = await fn(params);
         if (!res.data) {
-            toast.error(`⚠ ${res.data.message}`, styleToast);
+            toast.error(`⚠ ${res.message}`, styleToast);
         }
         store.dispatch(hide());
         return res;
     } catch (e) {
         store.dispatch(hide());
         let errors = e?.response ? e.response.data : e;
+        console.log(errors.message)
         if ("errors" in errors) {
-            Object.values(errors.errors).forEach(function (error) {
+            Object.values(errors).forEach(function (error) {
                 toast.error(`⚠ ${error[0]}`, styleToast);
             });
         } else {
