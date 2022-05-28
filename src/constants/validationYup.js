@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-export const STRING = Yup.string();
+export const NAME = Yup.string().required('Vui lòng nhập thông tin ');
 export const PASSWORDLogin = Yup.string().required("Vui lòng nhập mật khẩu")
 export const NUMBER = Yup.string().matches(/^[0-9]+$/, 'Dữ liệu phải là số').required('Vui lòng điền thông tin');
 

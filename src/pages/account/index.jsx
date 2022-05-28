@@ -11,11 +11,13 @@ import Payment_List from "./components/PaymentList";
 export default function Account(props) {
   const login = useSelector((state) => state.auth.login);
   const navigate = useNavigate();
-  // useEffect(() => {
-  //   if (!login) {
-  //     navigate("/auth");
-  //   }
-  // }, [login]);
+  const token = localStorage.getItem("login");
+  console.log(token);
+  useEffect(() => {
+    if (!token) {
+      navigate("/auth");
+    }
+  }, [token]);
   const location = useLocation();
   return (
     <section className="pt-7 pb-12">

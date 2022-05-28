@@ -2,10 +2,10 @@ import FormInput from "components/custom-fields/inputField/FormInput";
 import { FastField, Form, Formik } from "formik";
 import { Button, Col, Row } from "antd";
 import { useEffect, useState } from "react";
-import { EMAIL, PASSWORDLogin } from "constants/validationYup";
+import { EMAIL, PASSWORDLogin, NAME } from "constants/validationYup";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
-import { login, fetchGetLogin } from "redux/authSlice";
+import { login, fetchGetLogin, fetchResgiter } from "redux/authSlice";
 import { useNavigate } from "react-router-dom";
 const initialLogin = {
   username: "",
@@ -30,10 +30,20 @@ export default function Auth() {
   const handleSubmit = async (value) => {
     console.log(value);
     const { payload } = await dispatch(fetchGetLogin(value));
+    if (payload?.data?.accessToken) {
+      navigate("/");
+    }
+  };
+  const handleRegister = async (value) => {
+    const { payload } = await dispatch(fetchResgiter(value));
     console.log(payload);
   };
 
-  useEffect(() => {}, [login]);
+  useEffect(() => {
+    if (login) {
+      navigate("/");
+    }
+  }, [login]);
   return (
     <section className="py-12 bg-gray" style={{}}>
       <div className="container">
@@ -141,20 +151,26 @@ export default function Auth() {
                       initialValues={dataRes}
                       enableReinitialize={true}
                       validationSchema={validationSchema}
-                      onSubmit={handleSubmit}
+                      onSubmit={handleRegister}
                     >
-                      {() => {
+                      {({
+                        values,
+                        errors,
+                        handleSubmit,
+                        handleChange,
+                        handleBlur,
+                      }) => {
                         return (
-                          <Form id="form-res">
+                          <Form id="form-res" onBlur={handleBlur}>
                             <div className="row">
                               <div className="col-12 mb-3">
                                 <FastField
                                   component={FormInput}
-                                  name="email"
+                                  name="username"
                                   placeholder="Email Address *"
                                 />
                               </div>
-                              <div className="col-12">
+                              <div className="col-12  mb-3">
                                 <FastField
                                   component={FormInput}
                                   name="password"

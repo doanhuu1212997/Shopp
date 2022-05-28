@@ -1,8 +1,8 @@
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import axiosClient from "../api/AxiosClient"
-import { asyncGetList, asyncWrapper } from "../helper/asyncWrapper"
-let token = JSON.parse(localStorage.getItem("login"));
+import { asyncGetList, asyncWrapper, asyncCreate } from "../helper/asyncWrapper"
+
 
 const getLogin = options => {
     let url = `/login`;
@@ -15,10 +15,20 @@ export const fetchGetLogin = createAsyncThunk(
         return res;
     }
 );
+const resgister = options => {
+    let url = `/register`;
+    return axiosClient.post(url, options);
+};
+export const fetchResgiter = createAsyncThunk(
+    'product/fetchResgiter',
+    async options => {
+        let res = await asyncCreate(resgister, options);
+        return res;
+    }
+);
 const authSlice = createSlice({
     name: "auth",
     initialState: {
-        login: !!token,
     },
     reducers: {
 
@@ -26,14 +36,12 @@ const authSlice = createSlice({
             localStorage.removeItem("login");
             return {
                 ...state,
-                login: false
             }
         }
     },
     extraReducers: {
         [fetchGetLogin.fulfilled](state, { payload }) {
             localStorage.setItem("login", JSON.stringify(payload.data));
-            state.login = true
 
         }
     },

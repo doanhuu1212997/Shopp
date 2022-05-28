@@ -5,6 +5,7 @@ import * as routers from "./router";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "antd/dist/antd.css";
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
   const showContentComponents = (routers) => {
     let results = null;

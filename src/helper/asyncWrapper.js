@@ -37,8 +37,8 @@ export const asyncWrapper = async (fn, params = null) => {
         return res;
     } catch (e) {
         store.dispatch(hide());
-        let errors = e?.response ? e.response.data : e;
-        console.log(errors.message)
+        let errors = e?.response ? e.response.data : e.message;
+        console.log(errors)
         if ("errors" in errors) {
             Object.values(errors).forEach(function (error) {
                 toast.error(`⚠ ${error[0]}`, styleToast);
@@ -59,7 +59,7 @@ export const asyncCreate = async (fn, params = null) => {
     try {
         store.dispatch(show());
         const res = await fn(params);
-        if (!res.data.success) {
+        if (!res.data) {
             toast.error(`⚠ ${res.data.message}`, styleToast);
         } else {
             toast.success("Tạo mới thành công!", styleToast);
