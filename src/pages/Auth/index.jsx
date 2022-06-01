@@ -88,6 +88,7 @@ export default function Auth() {
                                   component={FormInput}
                                   name="password"
                                   placeholder="Password *"
+                                  typeInput="password"
                                 />
                               </div>
                             </div>
@@ -175,6 +176,7 @@ export default function Auth() {
                                   component={FormInput}
                                   name="password"
                                   placeholder="Password *"
+                                  typeInput="password"
                                 />
                               </div>
                               <div className="col-12">

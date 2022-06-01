@@ -48,14 +48,18 @@ function FormInput(props) {
               }
             >
               {Object.keys(icon).length > 0 && <span>{icon}</span>}
-              {typeInput === "string" ? (
-                <Input {...field} name={name} placeholder={placeholder} />
-              ) : (
-                <input
+              {typeInput === "password" ? (
+                <Input.Password
                   {...field}
-                  type="text"
-                  placeholder={placeholder}
                   name={name}
+                  placeholder={placeholder}
+                  className="form-control form-control-sm"
+                />
+              ) : (
+                <Input
+                  {...field}
+                  name={name}
+                  placeholder={placeholder}
                   className="form-control form-control-sm"
                 />
               )}

@@ -1,5 +1,8 @@
 import axios from 'axios';
+import { fetchrefreshToken } from 'redux/authSlice';
+import { getToken, setToken } from "utils/token"
 // Set up default config for http requests here
+import { fetchGetProduct } from "redux/productSlice";
 const axiosClient = axios.create({
 	baseURL: "http://cfd-reactjs.herokuapp.com",
 	headers: {
@@ -23,7 +26,24 @@ axiosClient.interceptors.response.use(
 		}
 		return response;
 	},
-	(error) => {
+	async (error) => {
+		// console.log(error.config)
+		let st = require("store/store");
+		let store = st.default;
+		if (error.request.status === 401 | error.request.status === 403) {
+			let token = getToken()
+			if (token) {
+				console.log(token)
+				const { payload } = await store.dispatch(fetchrefreshToken({
+					refreshToken: token.refreshToken
+				}))
+				// if (payload?.data) {
+				// 	token.accessToken = payload?.data.accessToken
+				// 	setToken(token)
+				// 	return axiosClient(error.config)
+				// }
+			}
+		}
 		throw error
 	}
 );

@@ -8,17 +8,22 @@ import Address from "./components/Address";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Payment_List from "./components/PaymentList";
+import { fetchgetInfor } from "redux/authSlice";
 export default function Account(props) {
   const login = useSelector((state) => state.auth.login);
   const navigate = useNavigate();
-  const token = localStorage.getItem("login");
+  const token = localStorage.getItem("token");
   console.log(token);
+  const dispatch = useDispatch();
   useEffect(() => {
     if (!token) {
       navigate("/auth");
     }
   }, [token]);
-  const location = useLocation();
+  useEffect(() => {
+    let { payload } = dispatch(fetchgetInfor());
+  }, []);
+
   return (
     <section className="pt-7 pb-12">
       <div className="container">

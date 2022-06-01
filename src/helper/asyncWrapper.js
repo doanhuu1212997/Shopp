@@ -53,22 +53,24 @@ export const asyncWrapper = async (fn, params = null) => {
     }
 };
 
-export const asyncCreate = async (fn, params = null) => {
+export const asyncCreate = async (fn, params = null, mess) => {
     let st = require("store/store");
     let store = st.default;
     try {
         store.dispatch(show());
         const res = await fn(params);
         if (!res.data) {
-            toast.error(`⚠ ${res.data.message}`, styleToast);
+            toast.error(`⚠ ${res.error}`, styleToast);
         } else {
-            toast.success("Tạo mới thành công!", styleToast);
+            toast.success(`${mess
+                }`, styleToast);
         }
         store.dispatch(hide());
         return res.data;
     } catch (e) {
         store.dispatch(hide());
         let errors = e?.response ? e.response.data : e;
+        console.log(errors)
         if ("errors" in errors) {
             Object.values(errors.errors).forEach(function (error) {
                 toast.error(`⚠ ${error[0]}`, styleToast);

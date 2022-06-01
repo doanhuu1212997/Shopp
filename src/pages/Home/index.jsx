@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchGetProduct } from "redux/productSlice";
 import CountDow from "hoc/widthCountDown";
 import countDown from "./components/countdown";
+import Paginate from "components/Paginate";
 
 export default function Home() {
   let dispatch = useDispatch();
@@ -17,6 +18,7 @@ export default function Home() {
   }, []);
   return (
     <div>
+      <Paginate />
       {/* CATEGORIES */}
       <section>
         <div
