@@ -20,6 +20,12 @@ export default function Account(props) {
       navigate("/auth");
     }
   }, [token]);
+  // useEffect(() => {
+  //   fetch("https://cfd-reactjs.herokuapp.com/user/get-info")
+  //     .then((response) => response.json())
+  //     .then((data) => console.log(data));
+  // }, []);
+
   useEffect(() => {
     let { payload } = dispatch(fetchgetInfor());
   }, []);

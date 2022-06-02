@@ -44,6 +44,7 @@ export default function Auth() {
       navigate("/");
     }
   }, [login]);
+
   return (
     <section className="py-12 bg-gray" style={{}}>
       <div className="container">
